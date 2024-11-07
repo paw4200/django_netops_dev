@@ -1,0 +1,79 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %} {%load crispy_forms_tags %} {% block nav_health %}link-secondary{%endblock%} 
+{%block content%}
+<div class="accordion" id="options">
+  <div class="accordion-item">
+    <div class="accordion-header" id="optionOne">
+      <h4 class="panel-title">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#crit_health">
+          Critical Link Health Checks
+        </button>
+      </h4>
+    </div>
+    <div
+      class="accordion-collapse collapse"
+      id="crit_health"
+      data-bs-parent="#options">
+      <div class="accordion-body">
+        <form method="post" autocomplete="off">
+          <div class="form-group">
+            {% csrf_token %} {{ crit_form|crispy }}
+            <input
+              type="submit"
+              name="crit_health_submit"
+              onclick="loading()" />
+            <span
+              class="spinner-border spinner-border-sm d-none"
+              aria-hidden="true"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-header" id="optionTwo">
+      <h4 class="panel-title">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#aci_dampening">
+          ACI EP Dampening Events
+        </button>
+      </h4>
+    </div>
+    <div
+      class="accordion-collapse collapse"
+      id="aci_dampening"
+      data-bs-parent="#options">
+      <div class="accordion-body">
+        <form method="post" autocomplete="off">
+          <div class="form-group">
+            {% csrf_token %} {{ aci_dampening_form|crispy }}
+            <input
+              type="submit"
+              name="aci_dampening_submit"
+              onclick="loading()" />
+            <span
+              class="spinner-border spinner-border-sm d-none"
+              aria-hidden="true"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function loading() {
+    const spinner = document.getElementsByClassName('spinner-border');
+    for (i in spinner) {
+      spinner[i].classList.remove('d-none');
+    }
+  }
+</script>
+{%endblock%}

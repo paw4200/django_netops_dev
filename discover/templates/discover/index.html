@@ -1,0 +1,62 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %}{%load crispy_forms_tags %}{% block nav_discover %}link-secondary{%endblock%}
+{%block content%}
+<div class="accordion" id="options">
+  <div class="accordion-item">
+    <div class="accordion-header" id="optionOne">
+      <h4 class="panel-title">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#cdp_map">
+          Map CDP Neighbors
+        </button>
+      </h4>
+    </div>
+    <div
+      class="accordion-collapse collapse"
+      id="cdp_map"
+      data-bs-parent="#options">
+      <div class="accordion-body">
+        <form method="post">
+          <div class="form-group">
+            {% csrf_token %} {{ cdp_form|crispy }}
+            <button type="submit" onclick="loading()">
+              <span
+                id="loading"
+                class="spinner-border spinner-border-sm d-none"
+                aria-hidden="true"></span>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const host = document.getElementById('id_host');
+    const site = document.getElementById('id_deviceSite');
+
+    host.addEventListener('change', function () {
+      if (host.value) {
+        site.disabled = true;
+      } else {
+        site.disabled = false;
+      }
+    });
+  });
+</script>
+<script>
+  function loading() {
+    const spinner = document.getElementsByClassName('spinner-border');
+    for (i in spinner) {
+      spinner[i].classList.remove('d-none');
+    }
+  }
+</script>
+
+{%endblock%}

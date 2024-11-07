@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block nav_commands %}link-secondary{%endblock%}
+{%block content%}
+<div class="container-fluid"></div>
+    <h2>Results</h2>
+    <ul>
+        {% for item in output %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{%endblock%}

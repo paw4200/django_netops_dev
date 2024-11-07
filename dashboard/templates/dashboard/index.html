@@ -1,0 +1,13 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %} 
+{% load static %}
+{% load django_tables2 %} 
+{% block nav_dashboard %}link-secondary{% endblock %} 
+{% block content %}
+<div class="container-fluid">
+  <link
+    href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}"
+    rel="stylesheet" />
+  {% render_table table %}
+</div>
+{% endblock %}
